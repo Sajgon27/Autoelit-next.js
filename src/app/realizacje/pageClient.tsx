@@ -7,6 +7,7 @@ import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import PageHeader from "@/components/PageHeader";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 const carImages = {
   all: [
@@ -185,21 +186,28 @@ const CarGallery: React.FC<{ tabs?: TabConfig[] }> = ({
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-16">
-          {images.map((image, index) => (
-            <div
-              key={image.src}
-              className="cursor-pointer hover:opacity-80 transition-opacity"
-              onClick={() => handleImageClick(index)}
-            >
-              <Image
-                src={image.src}
-                alt={image.alt}
-                height={300}
-                className="w-full h-48 object-cover rounded-lg"
-                width={400}
-              />
-            </div>
-          ))}
+          <AnimatePresence mode="wait">
+            {images.map((image, index) => (
+              <motion.div
+                key={image.src}
+                className="cursor-pointer hover:opacity-80 transition-opacity"
+                onClick={() => handleImageClick(index)}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -30 }}
+                transition={{ duration: 0.3, delay: index * 0.04 }}
+                layout
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  height={300}
+                  className="w-full h-48 object-cover rounded-lg"
+                  width={400}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
         <Lightbox
