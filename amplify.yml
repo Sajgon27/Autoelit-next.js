@@ -1,16 +1,17 @@
 version: 1
 frontend:
-  framework: nextjs
-  config:
-    Runtime: nodejs18.x
-  build:
-    commands:
-      - npm ci
-      - npm run build
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
   artifacts:
-    baseDirectory: /
+    baseDirectory: .next
     files:
       - '**/*'
   cache:
     paths:
       - node_modules/**/*
+
