@@ -1,0 +1,217 @@
+"use client";
+
+import React, { useState, useMemo } from "react";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
+import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
+import "yet-another-react-lightbox/plugins/thumbnails.css";
+import PageHeader from "@/components/PageHeader";
+import Image from "next/image";
+
+const carImages = {
+  all: [
+    { src: "/images/carsGallery/jeep/1.jpg", alt: "Jeep" },
+    { src: "/images/carsGallery/audi r8/2.jpg", alt: "Audi R8" },
+    { src: "/images/carsGallery/bmw m4/1.jpg", alt: "BMW M4" },
+    { src: "/images/carsGallery/maybach s/1.jpg", alt: "Maybach S" },
+    {
+      src: "/images/carsGallery/aston martin dbx/2.jpg",
+      alt: "Aston Martin DBX",
+    },
+    { src: "/images/carsGallery/maybach s 2/3.jpg", alt: "Maybach S 2" },
+    { src: "/images/carsGallery/bmw x5/2.jpg", alt: "BMW X5" },
+    { src: "/images/carsGallery/maybach s 2/1.jpg", alt: "Maybach S 2" },
+
+    { src: "/images/carsGallery/audi r8/1.jpg", alt: "Audi R8" },
+    { src: "/images/carsGallery/bmw m4/2.jpg", alt: "BMW M4" },
+
+    { src: "/images/carsGallery/audi r8/3.jpg", alt: "Audi R8" },
+    { src: "/images/carsGallery/bmw x5/1.jpg", alt: "BMW X5" },
+    {
+      src: "/images/carsGallery/aston martin dbx/4.jpg",
+      alt: "Aston Martin DBX",
+    },
+    { src: "/images/carsGallery/bmw m4/3.jpg", alt: "BMW M4" },
+
+    { src: "/images/carsGallery/bmw x5/4.jpg", alt: "BMW X5" },
+    { src: "/images/carsGallery/maybach s 2/4.jpg", alt: "Maybach S 2" },
+  ],
+  astonMartin: [
+    {
+      src: "/images/carsGallery/aston martin dbx/1.jpg",
+      alt: "Aston Martin DBX",
+    },
+    {
+      src: "/images/carsGallery/aston martin dbx/2.jpg",
+      alt: "Aston Martin DBX",
+    },
+    {
+      src: "/images/carsGallery/aston martin dbx/3.jpg",
+      alt: "Aston Martin DBX",
+    },
+    {
+      src: "/images/carsGallery/aston martin dbx/4.jpg",
+      alt: "Aston Martin DBX",
+    },
+  ],
+  audiR8: [
+    { src: "/images/carsGallery/audi r8/1.jpg", alt: "Audi R8" },
+    { src: "/images/carsGallery/audi r8/2.jpg", alt: "Audi R8" },
+    { src: "/images/carsGallery/audi r8/3.jpg", alt: "Audi R8" },
+    { src: "/images/carsGallery/audi r8/4.jpg", alt: "Audi R8" },
+  ],
+  BMWM4: [
+    { src: "/images/carsGallery/bmw m4/1.jpg", alt: "BMW M4" },
+    { src: "/images/carsGallery/bmw m4/2.jpg", alt: "BMW M4" },
+    { src: "/images/carsGallery/bmw m4/3.jpg", alt: "BMW M4" },
+    { src: "/images/carsGallery/bmw m4/4.jpg", alt: "BMW M4" },
+  ],
+  BMWX5: [
+    { src: "/images/carsGallery/bmw x5/1.jpg", alt: "BMW X5" },
+    { src: "/images/carsGallery/bmw x5/2.jpg", alt: "BMW X5" },
+    { src: "/images/carsGallery/bmw x5/3.jpg", alt: "BMW X5" },
+    { src: "/images/carsGallery/bmw x5/4.jpg", alt: "BMW X5" },
+  ],
+  Jeep: [
+    { src: "/images/carsGallery/jeep/1.jpg", alt: "Jeep" },
+    { src: "/images/carsGallery/jeep/2.jpg", alt: "Jeep" },
+    { src: "/images/carsGallery/jeep/3.jpg", alt: "Jeep" },
+    { src: "/images/carsGallery/jeep/4.jpg", alt: "Jeep" },
+  ],
+  maybachS: [
+    { src: "/images/carsGallery/maybach s/1.jpg", alt: "Maybach S" },
+    { src: "/images/carsGallery/maybach s/2.jpg", alt: "Maybach S" },
+    { src: "/images/carsGallery/maybach s/3.jpg", alt: "Maybach S" },
+    { src: "/images/carsGallery/maybach s/4.jpg", alt: "Maybach S" },
+  ],
+  maybachS2: [
+    { src: "/images/carsGallery/maybach s 2/1.jpg", alt: "Maybach S 2" },
+    { src: "/images/carsGallery/maybach s 2/2.jpg", alt: "Maybach S 2" },
+    { src: "/images/carsGallery/maybach s 2/3.jpg", alt: "Maybach S 2" },
+    { src: "/images/carsGallery/maybach s 2/4.jpg", alt: "Maybach S 2" },
+  ],
+  mercedescBenzS63AMG: [
+    {
+      src: "/images/carsGallery/mercedes-benz s63 amg/1.jpg",
+      alt: "Mercedes-Benz S63 AMG",
+    },
+    {
+      src: "/images/carsGallery/mercedes-benz s63 amg/2.jpg",
+      alt: "Mercedes-Benz S63 AMG",
+    },
+    {
+      src: "/images/carsGallery/mercedes-benz s63 amg/3.jpg",
+      alt: "Mercedes-Benz S63 AMG",
+    },
+    {
+      src: "/images/carsGallery/mercedes-benz s63 amg/4.jpg",
+      alt: "Mercedes-Benz S63 AMG",
+    },
+  ],
+  mercedesBenzS450: [
+    {
+      src: "/images/carsGallery/mercedes-benz s450/1.jpg",
+      alt: "Mercedes-Benz S450",
+    },
+    {
+      src: "/images/carsGallery/mercedes-benz s450/2.jpg",
+      alt: "Mercedes-Benz S450",
+    },
+    {
+      src: "/images/carsGallery/mercedes-benz s450/3.jpg",
+      alt: "Mercedes-Benz S450",
+    },
+    {
+      src: "/images/carsGallery/mercedes-benz s450/4.jpg",
+      alt: "Mercedes-Benz S450",
+    },
+  ],
+  volvo: [
+    { src: "/images/carsGallery/volvo1.jpg", alt: "Volvo" },
+    { src: "/images/carsGallery/volvo2.jpg", alt: "Volvo" },
+    { src: "/images/carsGallery/volvo3.jpg", alt: "Volvo" },
+    { src: "/images/carsGallery/volvo4.jpg", alt: "Volvo" },
+  ],
+};
+
+type TabConfig = { key: keyof typeof carImages; label: string };
+
+const CarGallery: React.FC<{ tabs?: TabConfig[] }> = ({
+  tabs = [
+    { key: "all", label: "Wyróżnione" },
+    { key: "astonMartin", label: "Aston Martin" },
+    { key: "audiR8", label: "Audi R8" },
+    { key: "BMWM4", label: "BMW M4" },
+    { key: "BMWX5", label: "BMW X5" },
+    { key: "Jeep", label: "Jeep" },
+    { key: "maybachS", label: "Maybach S" },
+    { key: "mercedescBenzS63AMG", label: "Mercedes-Benz S63 AMG" },
+    { key: "mercedesBenzS450", label: "Mercedes-Benz S450" },
+    { key: "maybachS2", label: "Maybach S 2" },
+  ],
+}) => {
+  const [activeTab, setActiveTab] = useState<keyof typeof carImages>(
+    tabs[0].key
+  );
+  const [openLightbox, setOpenLightbox] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const images = useMemo(() => carImages[activeTab], [activeTab]);
+
+  const handleImageClick = (index: number) => {
+    setCurrentImageIndex(index);
+    setOpenLightbox(true);
+  };
+
+  return (
+    <div className="bg-background">
+      <PageHeader title="Realizacje" />
+      <div className="container py-6 md:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-2 mt-10 mb-4">
+          {tabs.map(({ key, label }) => (
+            <button
+              key={key}
+              onClick={() => setActiveTab(key)}
+              className={`rounded-md text-white cursor-pointer border border-zinc-700 px-8 py-2 transition-colors 
+                ${
+                  activeTab === key
+                    ? "bg-primary "
+                    : "bg-zinc-800 hover:bg-gray-300 hover:text-black"
+                }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 my-16">
+          {images.map((image, index) => (
+            <div
+              key={image.src}
+              className="cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={() => handleImageClick(index)}
+            >
+              <Image
+                src={image.src}
+                alt={image.alt}
+                height={300}
+                className="w-full h-48 object-cover rounded-lg"
+                width={400}
+              />
+            </div>
+          ))}
+        </div>
+
+        <Lightbox
+          open={openLightbox}
+          close={() => setOpenLightbox(false)}
+          slides={images}
+          index={currentImageIndex}
+          plugins={[Thumbnails]}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default CarGallery;
