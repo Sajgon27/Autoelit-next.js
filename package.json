@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    
     "start": "next start",
     "lint": "next lint"
   },
@@ -15,6 +14,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@studio-freight/lenis": "^1.0.42",
+    "aws-amplify": "^6.15.0",
     "axios": "^1.9.0",
     "gsap": "^3.13.0",
     "next": "15.1.8",
@@ -25,15 +25,21 @@
     "yet-another-react-lightbox": "^3.23.2"
   },
   "devDependencies": {
+    "@aws-amplify/backend": "^1.16.1",
+    "@aws-amplify/backend-cli": "^1.7.2",
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "aws-cdk-lib": "^2.189.1",
+    "constructs": "^10.4.2",
+    "esbuild": "^0.25.5",
     "eslint": "^9",
     "eslint-config-next": "15.1.8",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
   }
 }
