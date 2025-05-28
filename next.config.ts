@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     loader: 'imgix',
     path: 'https://smd-web-314690922.imgix.net',
   },
+  //hm
    webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
