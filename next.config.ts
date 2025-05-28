@@ -2,10 +2,17 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
      output: 'export',
- images: {
-    loader: 'imgix',
-    path: 'https://smd-web-314690922.imgix.net',
+       images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "https://smd-web-314690922.imgix.net",
+      },
+    ],
+    loader: "custom",
+    loaderFile: "./loader.js",
   },
+ 
   //hm
    webpack(config) {
     config.module.rules.push({
