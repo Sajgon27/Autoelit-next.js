@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
      output: 'export',
  images: {
     loader: 'imgix',
-    path: 'https://smd-web-314690922.imgix.net/',
+    path: 'https://smd-web-314690922.imgix.net',
   },
    webpack(config) {
     config.module.rules.push({
