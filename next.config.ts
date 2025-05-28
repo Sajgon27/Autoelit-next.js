@@ -3,7 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
      output: 'export',
  images: {
-    unoptimized: true
+    loader: 'imgix',
+    path: 'https://smd-web-397095246.imgix.net',
   },
    webpack(config) {
     config.module.rules.push({
