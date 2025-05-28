@@ -10,7 +10,7 @@ export default function Footer() {
     { label: "Naprawa Lakieru SSR", href: "/naprawa-lakieru" },
     { label: "Kontakt", href: "/kontakt" },
   ];
-
+  console.log(process.env.EMAIL_RECEIVER);
   return (
     <footer className="bg-foreground border-t border-solid border-t-[#3F3F46]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
