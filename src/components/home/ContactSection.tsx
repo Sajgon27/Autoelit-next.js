@@ -58,7 +58,7 @@ export default function ContactSection() {
       );
     } catch (err) {
       console.error("Error sending email:", err);
-      setStatus("Something went wrong.");
+      setStatus("Błąd. Coś poszło nie tak ");
     }
   };
   return (
