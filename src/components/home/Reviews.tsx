@@ -13,7 +13,7 @@ export default function Reviews() {
     if (containerRef.current) {
       const script = document.createElement("script");
       script.src =
-        "https://cdn.trustindex.io/loader.js?8e2beb747c1e00631366b3a2594";
+        "https://static.elfsight.com/platform/platform.js";
       script.async = true;
       containerRef.current.appendChild(script);
     }
@@ -38,7 +38,8 @@ export default function Reviews() {
               Zobacz, co mówią o nas nasi klienci
             </p>
           </div>
-          <div id="reviews-container" ref={containerRef}></div>
+          <div ref={containerRef} className="elfsight-app-ca3e1842-5451-45fe-ac2d-1048181299af" data-elfsight-app-lazy></div>
+         
         </div>
         <div className="absolute inset-0 bg-black/90" />
       </section>
